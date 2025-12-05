@@ -1,0 +1,24 @@
+# FreeCAD backup files
+*.FCBak
+*.FCStd1
+*.FCStd2
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Test files
+test_*.py
+*.stl
+*.step

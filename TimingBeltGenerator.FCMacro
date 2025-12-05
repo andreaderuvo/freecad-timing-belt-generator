@@ -1,0 +1,352 @@
+# -*- coding: utf-8 -*-
+"""
+Timing Belt Generator for FreeCAD - WORKING VERSION
+Author: andreaderuvo
+"""
+
+import FreeCAD
+import Part
+import math
+from FreeCAD import Base
+try:
+    import FreeCADGui
+except:
+    pass
+
+# Belt profile definitions [pitch, back_thickness, belt_width]
+TOOTH_PROFILES = {
+    "MXL": {"pitch": 2.032, "back_thickness": 0.74, "belt_width": 6.35},
+    "T2.5": {"pitch": 2.5, "back_thickness": 0.6, "belt_width": 6},
+    "T5": {"pitch": 5, "back_thickness": 1, "belt_width": 10},
+    "T10": {"pitch": 10, "back_thickness": 2, "belt_width": 16},
+    "GT2_2mm": {"pitch": 2, "back_thickness": 0.76, "belt_width": 6},
+    "GT2_3mm": {"pitch": 3, "back_thickness": 1.27, "belt_width": 9},
+    "GT2_5mm": {"pitch": 5, "back_thickness": 1.88, "belt_width": 15},
+    "AT5": {"pitch": 5, "back_thickness": 1, "belt_width": 10},
+    "HTD_3mm": {"pitch": 3, "back_thickness": 1.19, "belt_width": 9},
+    "HTD_5mm": {"pitch": 5, "back_thickness": 1.73, "belt_width": 9},
+    "HTD_8mm": {"pitch": 8, "back_thickness": 2.64, "belt_width": 30},
+    "40DP": {"pitch": 2.073, "back_thickness": 0.74, "belt_width": 4.7625},
+    "XL": {"pitch": 5.08, "back_thickness": 1.03, "belt_width": 7.94},
+    "L": {"pitch": 9.525, "back_thickness": 1.66, "belt_width": 19.05},
+    "S3M": {"pitch": 3, "back_thickness": 1.14, "belt_width": 6}
+}
+
+def create_tooth_profile(profile):
+    """Create accurate tooth profile for different belt types"""
+    
+    if profile == "S3M":
+        points = [
+            Base.Vector(-1.14, -0.6, 0), Base.Vector(-1.14, 0, 0), 
+            Base.Vector(-1.065, 0.025, 0), Base.Vector(-0.995, 0.095, 0),
+            Base.Vector(-0.945, 0.205, 0), Base.Vector(-0.92, 0.34, 0),
+            Base.Vector(-0.615, 0.965, 0), Base.Vector(-0.585, 1.04, 0),
+            Base.Vector(-0.54, 1.105, 0), Base.Vector(-0.48, 1.16, 0),
+            Base.Vector(-0.41, 1.205, 0), Base.Vector(-0.33, 1.24, 0),
+            Base.Vector(-0.245, 1.265, 0), Base.Vector(-0.155, 1.28, 0),
+            Base.Vector(-0.065, 1.285, 0), Base.Vector(0, 1.286, 0),
+            Base.Vector(0.065, 1.285, 0), Base.Vector(0.155, 1.28, 0),
+            Base.Vector(0.245, 1.265, 0), Base.Vector(0.33, 1.24, 0),
+            Base.Vector(0.41, 1.205, 0), Base.Vector(0.48, 1.16, 0),
+            Base.Vector(0.54, 1.105, 0), Base.Vector(0.585, 1.04, 0),
+            Base.Vector(0.615, 0.965, 0), Base.Vector(0.92, 0.34, 0),
+            Base.Vector(0.945, 0.205, 0), Base.Vector(0.995, 0.095, 0),
+            Base.Vector(1.065, 0.025, 0), Base.Vector(1.14, 0, 0),
+            Base.Vector(1.14, -0.6, 0), Base.Vector(-1.14, -0.6, 0)
+        ]
+    
+    elif profile == "GT2_2mm":
+        points = [
+            Base.Vector(0.747183, -0.5, 0), Base.Vector(0.747183, 0, 0), Base.Vector(0.647876, 0.037218, 0),
+            Base.Vector(0.598311, 0.130528, 0), Base.Vector(0.578556, 0.238423, 0), Base.Vector(0.547158, 0.343077, 0),
+            Base.Vector(0.504649, 0.443762, 0), Base.Vector(0.451556, 0.53975, 0), Base.Vector(0.358229, 0.636924, 0),
+            Base.Vector(0.2484, 0.707276, 0), Base.Vector(0.127259, 0.750044, 0), Base.Vector(0, 0.76447, 0),
+            Base.Vector(-0.127259, 0.750044, 0), Base.Vector(-0.2484, 0.707276, 0), Base.Vector(-0.358229, 0.636924, 0),
+            Base.Vector(-0.451556, 0.53975, 0), Base.Vector(-0.504797, 0.443762, 0), Base.Vector(-0.547291, 0.343077, 0),
+            Base.Vector(-0.578605, 0.238423, 0), Base.Vector(-0.598311, 0.130528, 0), Base.Vector(-0.648009, 0.037218, 0),
+            Base.Vector(-0.747183, 0, 0), Base.Vector(-0.747183, -0.5, 0), Base.Vector(0.747183, -0.5, 0)
+        ]
+    
+    elif profile == "T2.5":
+        points = [
+            Base.Vector(-0.839258, -0.5, 0), Base.Vector(-0.839258, 0, 0), Base.Vector(-0.770246, 0.021652, 0),
+            Base.Vector(-0.726369, 0.079022, 0), Base.Vector(-0.529167, 0.620889, 0), Base.Vector(-0.485025, 0.67826, 0),
+            Base.Vector(-0.416278, 0.699911, 0), Base.Vector(0.416278, 0.699911, 0), Base.Vector(0.484849, 0.67826, 0),
+            Base.Vector(0.528814, 0.620889, 0), Base.Vector(0.726369, 0.079022, 0), Base.Vector(0.770114, 0.021652, 0),
+            Base.Vector(0.839258, 0, 0), Base.Vector(0.839258, -0.5, 0), Base.Vector(-0.839258, -0.5, 0)
+        ]
+    
+    elif profile == "MXL":
+        points = [
+            Base.Vector(-0.660421, -0.5, 0), Base.Vector(-0.660421, 0, 0), Base.Vector(-0.621898, 0.006033, 0),
+            Base.Vector(-0.587714, 0.023037, 0), Base.Vector(-0.560056, 0.049424, 0), Base.Vector(-0.541182, 0.083609, 0),
+            Base.Vector(-0.417357, 0.424392, 0), Base.Vector(-0.398413, 0.458752, 0), Base.Vector(-0.370649, 0.48514, 0),
+            Base.Vector(-0.336324, 0.502074, 0), Base.Vector(-0.297744, 0.508035, 0), Base.Vector(0.297744, 0.508035, 0),
+            Base.Vector(0.336268, 0.502074, 0), Base.Vector(0.370452, 0.48514, 0), Base.Vector(0.39811, 0.458752, 0),
+            Base.Vector(0.416983, 0.424392, 0), Base.Vector(0.540808, 0.083609, 0), Base.Vector(0.559752, 0.049424, 0),
+            Base.Vector(0.587516, 0.023037, 0), Base.Vector(0.621841, 0.006033, 0), Base.Vector(0.660421, 0, 0),
+            Base.Vector(0.660421, -0.5, 0), Base.Vector(-0.660421, -0.5, 0)
+        ]
+    
+    else:
+        # Default simple rectangular tooth
+        return None
+    
+    # Create wire from points
+    wire = Part.makePolygon(points)
+    face = Part.Face(wire)
+    return face
+
+def create_timing_belt(tooth_count=72, belt_width=None, pitch=None, profile="S3M", use_accurate_teeth=True):
+    """
+    Create a timing belt with specified parameters
+    """
+    
+    # Get parameters from profile defaults
+    if profile in TOOTH_PROFILES:
+        params = TOOTH_PROFILES[profile]
+        if pitch is None:
+            pitch = params["pitch"]
+        if belt_width is None:
+            belt_width = params["belt_width"]
+        back_thickness = params["back_thickness"]
+    else:
+        # Default values for unknown profile
+        if pitch is None:
+            pitch = 3
+        if belt_width is None:
+            belt_width = 9
+        back_thickness = 1.14
+    
+    tooth_height = 1.2
+    tooth_width_ratio = 0.5  # tooth width as ratio of pitch
+    
+    # Calculate dimensions
+    circumference = tooth_count * pitch
+    pitch_radius = circumference / (2 * math.pi)
+    outer_radius = pitch_radius + back_thickness / 2
+    inner_radius = pitch_radius - back_thickness / 2
+    
+    print(f"Creating {profile} belt: {tooth_count} teeth, {circumference:.1f}mm circumference")
+    print(f"Pitch diameter: {pitch_radius * 2:.1f}mm")
+    
+    # Create belt body (ring)
+    outer_cyl = Part.makeCylinder(outer_radius, belt_width)
+    inner_cyl = Part.makeCylinder(inner_radius, belt_width)
+    belt_body = outer_cyl.cut(inner_cyl)
+    
+    # Create teeth
+    tooth_angle = 360.0 / tooth_count
+    
+    # Create all teeth positioned radially (pointing toward center)
+    teeth_list = []
+    for i in range(tooth_count):
+        angle = i * tooth_angle
+        
+        if use_accurate_teeth and profile in ["S3M", "GT2_2mm", "T2.5", "MXL"]:
+            # Use accurate tooth profile
+            tooth_face = create_tooth_profile(profile)
+            if tooth_face:
+                tooth = tooth_face.extrude(Base.Vector(0, 0, belt_width))
+                # Flip 180 degrees so tooth points INWARD
+                tooth.rotate(Base.Vector(0,0,0), Base.Vector(0,0,1), 180)
+                # Move so the back of tooth aligns with inner radius  
+                tooth.translate(Base.Vector(0, inner_radius, 0))
+                # Rotate to correct angular position
+                tooth.rotate(Base.Vector(0,0,0), Base.Vector(0,0,1), angle - 90)
+            else:
+                # Fallback to simple tooth
+                use_accurate_teeth = False
+        else:
+            # Use simple rectangular tooth pointing INWARD
+            tooth_width = pitch * tooth_width_ratio
+            tooth = Part.makeBox(tooth_height, tooth_width, belt_width)
+            # Position tooth so it points inward radially
+            tooth.translate(Base.Vector(0, -tooth_width/2, 0))  # Changed from -tooth_height to 0
+            # Move to inner radius (pointing inward)
+            tooth.translate(Base.Vector(inner_radius - tooth_height, 0, 0))  # Subtract tooth_height
+            # Rotate to correct angular position
+            tooth.rotate(Base.Vector(0,0,0), Base.Vector(0,0,1), angle)
+        
+        teeth_list.append(tooth)
+    
+    # Fuse all teeth together first (more efficient)
+    if teeth_list:
+        teeth_compound = teeth_list[0]
+        for t in teeth_list[1:]:
+            teeth_compound = teeth_compound.fuse(t)
+        
+        # Fuse teeth with belt body
+        final_belt = belt_body.fuse(teeth_compound)
+        
+        # Verify result
+        if final_belt.isValid():
+            bbox = final_belt.BoundBox
+            print(f"Belt created successfully!")
+            print(f"Dimensions: {bbox.XLength:.1f} x {bbox.YLength:.1f} x {bbox.ZLength:.1f} mm")
+            return final_belt
+        else:
+            print("ERROR: Invalid geometry!")
+            return None
+    
+    return belt_body
+
+def create_belt_gui():
+    """Create belt with GUI dialog"""
+    try:
+        from PySide import QtGui
+        
+        # Create dialog
+        dialog = QtGui.QDialog()
+        dialog.setWindowTitle("Timing Belt Generator")
+        dialog.resize(350, 250)
+        
+        layout = QtGui.QVBoxLayout(dialog)
+        
+        # Profile selection
+        profile_label = QtGui.QLabel("Belt Profile:")
+        profile_combo = QtGui.QComboBox()
+        profile_combo.addItems(sorted(TOOTH_PROFILES.keys()))
+        profile_combo.setCurrentText("S3M")
+        
+        # Tooth count
+        teeth_label = QtGui.QLabel("Number of teeth:")
+        teeth_spin = QtGui.QSpinBox()
+        teeth_spin.setMinimum(10)
+        teeth_spin.setMaximum(500)
+        teeth_spin.setValue(72)
+        
+        # Belt width (auto-updated based on profile)
+        width_label = QtGui.QLabel("Belt width (mm):")
+        width_spin = QtGui.QDoubleSpinBox()
+        width_spin.setMinimum(1)
+        width_spin.setMaximum(50)
+        width_spin.setValue(6)  # Default S3M width
+        width_spin.setSingleStep(0.5)
+        
+        # Update width when profile changes
+        def update_width():
+            profile = profile_combo.currentText()
+            if profile in TOOTH_PROFILES:
+                width_spin.setValue(TOOTH_PROFILES[profile]["belt_width"])
+        
+        profile_combo.currentTextChanged.connect(update_width)
+        update_width()  # Set initial value
+        
+        # Accurate teeth checkbox
+        accurate_check = QtGui.QCheckBox("Use accurate tooth profiles")
+        accurate_check.setChecked(True)
+        
+        # Buttons
+        button_box = QtGui.QDialogButtonBox(
+            QtGui.QDialogButtonBox.Ok | QtGui.QDialogButtonBox.Cancel
+        )
+        button_box.accepted.connect(dialog.accept)
+        button_box.rejected.connect(dialog.reject)
+        
+        # Add to layout
+        layout.addWidget(profile_label)
+        layout.addWidget(profile_combo)
+        layout.addWidget(teeth_label)
+        layout.addWidget(teeth_spin)
+        layout.addWidget(width_label)
+        layout.addWidget(width_spin)
+        layout.addWidget(accurate_check)
+        layout.addWidget(button_box)
+        
+        if dialog.exec_():
+            # Create belt
+            belt = create_timing_belt(
+                tooth_count=teeth_spin.value(),
+                belt_width=width_spin.value(),
+                profile=profile_combo.currentText(),
+                use_accurate_teeth=accurate_check.isChecked()
+            )
+            
+            if belt:
+                name = f"{profile_combo.currentText()}_{teeth_spin.value()}T_{width_spin.value()}mm"
+                add_to_document(belt, name)
+            
+    except Exception as e:
+        print(f"Error in GUI: {e}")
+        # Fallback to simple input
+        belt = create_timing_belt()
+        if belt:
+            add_to_document(belt, "S3M_72T_default")
+
+def add_to_document(shape, name="TimingBelt"):
+    """Add shape to FreeCAD document and fit view"""
+    doc = FreeCAD.ActiveDocument
+    if not doc:
+        doc = FreeCAD.newDocument("TimingBelt")
+    
+    obj = doc.addObject("Part::Feature", name)
+    obj.Shape = shape
+    doc.recompute()
+    
+    # Try to fit view
+    try:
+        FreeCADGui.ActiveDocument.activeView().viewAxonometric()
+        FreeCADGui.SendMsgToActiveView("ViewFit")
+    except:
+        print("Use View > Fit All to see the belt")
+
+# Quick creation functions for S3M
+def belt_72():
+    """Create standard 72-tooth S3M belt with accurate teeth"""
+    belt = create_timing_belt(72, profile="S3M", use_accurate_teeth=True)
+    if belt:
+        add_to_document(belt, "S3M_72T_accurate")
+
+def belt_90():
+    """Create 90-tooth S3M belt with accurate teeth"""
+    belt = create_timing_belt(90, belt_width=6.5, profile="S3M", use_accurate_teeth=True)
+    if belt:
+        add_to_document(belt, "S3M_90T_accurate")
+
+# Quick creation functions for GT2
+def gt2_60():
+    """Create 60-tooth GT2 2mm belt with accurate teeth"""
+    belt = create_timing_belt(60, profile="GT2_2mm", use_accurate_teeth=True)
+    if belt:
+        add_to_document(belt, "GT2_2mm_60T_accurate")
+
+def gt2_80():
+    """Create 80-tooth GT2 2mm belt with accurate teeth"""
+    belt = create_timing_belt(80, profile="GT2_2mm", use_accurate_teeth=True)
+    if belt:
+        add_to_document(belt, "GT2_2mm_80T_accurate")
+
+# Quick creation functions for T2.5
+def t25_60():
+    """Create 60-tooth T2.5 belt with accurate teeth"""
+    belt = create_timing_belt(60, profile="T2.5", use_accurate_teeth=True)
+    if belt:
+        add_to_document(belt, "T2.5_60T_accurate")
+
+# Quick creation functions for MXL
+def mxl_100():
+    """Create 100-tooth MXL belt with accurate teeth"""
+    belt = create_timing_belt(100, profile="MXL", use_accurate_teeth=True)
+    if belt:
+        add_to_document(belt, "MXL_100T_accurate")
+
+# Simple versions for large tooth counts
+def belt_207_simple():
+    """Create 207-tooth S3M belt with simple teeth (faster)"""
+    belt = create_timing_belt(207, belt_width=6.5, profile="S3M", use_accurate_teeth=False)
+    if belt:
+        add_to_document(belt, "S3M_207T_simple")
+
+# Run when imported
+if __name__ == "__main__":
+    create_belt_gui()
+else:
+    print("Timing Belt Generator loaded")
+    print("Quick functions:")
+    print("  S3M: belt_72(), belt_90(), belt_207_simple()")  
+    print("  GT2: gt2_60(), gt2_80()")
+    print("  T2.5: t25_60()")
+    print("  MXL: mxl_100()")
+    print("GUI: create_belt_gui()")
+    print("Custom: create_timing_belt(teeth, profile='S3M', use_accurate_teeth=True)")
