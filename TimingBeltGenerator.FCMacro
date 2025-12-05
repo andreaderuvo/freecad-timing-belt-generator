@@ -130,6 +130,147 @@ def create_tooth_profile(profile):
             Base.Vector(-1.89036, -0.75, 0)
         ]
     
+    elif profile == "HTD_8mm":
+        # HTD 8mm profile  
+        points = [
+            Base.Vector(-3.301471, -1, 0), Base.Vector(-3.301471, 0, 0), Base.Vector(-3.16611, 0.012093, 0),
+            Base.Vector(-3.038062, 0.047068, 0), Base.Vector(-2.919646, 0.10297, 0), Base.Vector(-2.813182, 0.177844, 0),
+            Base.Vector(-2.720989, 0.269734, 0), Base.Vector(-2.645387, 0.376684, 0), Base.Vector(-2.588694, 0.496739, 0),
+            Base.Vector(-2.553229, 0.627944, 0), Base.Vector(-2.460801, 1.470025, 0), Base.Vector(-2.411413, 1.691917, 0),
+            Base.Vector(-2.343887, 1.905691, 0), Base.Vector(-2.259126, 2.110563, 0), Base.Vector(-2.158035, 2.30575, 0),
+            Base.Vector(-2.041518, 2.490467, 0), Base.Vector(-1.910478, 2.66393, 0), Base.Vector(-1.76582, 2.825356, 0),
+            Base.Vector(-1.608446, 2.973961, 0), Base.Vector(-1.439261, 3.10896, 0), Base.Vector(-1.259169, 3.22957, 0),
+            Base.Vector(-1.069074, 3.335006, 0), Base.Vector(-0.869878, 3.424485, 0), Base.Vector(-0.662487, 3.497224, 0),
+            Base.Vector(-0.447804, 3.552437, 0), Base.Vector(-0.226732, 3.589341, 0), Base.Vector(-0.000176, 3.607153, 0),
+            Base.Vector(0.226511, 3.589461, 0), Base.Vector(0.447712, 3.552654, 0), Base.Vector(0.66252, 3.497516, 0),
+            Base.Vector(0.870027, 3.424833, 0), Base.Vector(1.069329, 3.33539, 0), Base.Vector(1.259517, 3.229973, 0),
+            Base.Vector(1.439687, 3.109367, 0), Base.Vector(1.608931, 2.974358, 0), Base.Vector(1.766344, 2.825731, 0),
+            Base.Vector(1.911018, 2.664271, 0), Base.Vector(2.042047, 2.490765, 0), Base.Vector(2.158526, 2.305998, 0),
+            Base.Vector(2.259547, 2.110755, 0), Base.Vector(2.344204, 1.905821, 0), Base.Vector(2.411591, 1.691983, 0),
+            Base.Vector(2.460801, 1.470025, 0), Base.Vector(2.553229, 0.627944, 0), Base.Vector(2.588592, 0.496739, 0),
+            Base.Vector(2.645238, 0.376684, 0), Base.Vector(2.720834, 0.269734, 0), Base.Vector(2.81305, 0.177844, 0),
+            Base.Vector(2.919553, 0.10297, 0), Base.Vector(3.038012, 0.047068, 0), Base.Vector(3.166095, 0.012093, 0),
+            Base.Vector(3.301471, 0, 0), Base.Vector(3.301471, -1, 0), Base.Vector(-3.301471, -1, 0)
+        ]
+    
+    elif profile == "T5":
+        # T5 profile
+        points = [
+            Base.Vector(-1.632126, -0.5, 0), Base.Vector(-1.632126, 0, 0), Base.Vector(-1.568549, 0.004939, 0),
+            Base.Vector(-1.507539, 0.019367, 0), Base.Vector(-1.450023, 0.042686, 0), Base.Vector(-1.396912, 0.074224, 0),
+            Base.Vector(-1.349125, 0.113379, 0), Base.Vector(-1.307581, 0.159508, 0), Base.Vector(-1.273186, 0.211991, 0),
+            Base.Vector(-1.246868, 0.270192, 0), Base.Vector(-1.009802, 0.920362, 0), Base.Vector(-0.983414, 0.978433, 0),
+            Base.Vector(-0.949018, 1.030788, 0), Base.Vector(-0.907524, 1.076798, 0), Base.Vector(-0.859829, 1.115847, 0),
+            Base.Vector(-0.80682, 1.147314, 0), Base.Vector(-0.749402, 1.170562, 0), Base.Vector(-0.688471, 1.184956, 0),
+            Base.Vector(-0.624921, 1.189895, 0), Base.Vector(0.624971, 1.189895, 0), Base.Vector(0.688622, 1.184956, 0),
+            Base.Vector(0.749607, 1.170562, 0), Base.Vector(0.807043, 1.147314, 0), Base.Vector(0.860055, 1.115847, 0),
+            Base.Vector(0.907754, 1.076798, 0), Base.Vector(0.949269, 1.030788, 0), Base.Vector(0.9837, 0.978433, 0),
+            Base.Vector(1.010193, 0.920362, 0), Base.Vector(1.246907, 0.270192, 0), Base.Vector(1.273295, 0.211991, 0),
+            Base.Vector(1.307726, 0.159508, 0), Base.Vector(1.349276, 0.113379, 0), Base.Vector(1.397039, 0.074224, 0),
+            Base.Vector(1.450111, 0.042686, 0), Base.Vector(1.507589, 0.019367, 0), Base.Vector(1.568563, 0.004939, 0),
+            Base.Vector(1.632126, 0, 0), Base.Vector(1.632126, -0.5, 0), Base.Vector(-1.632126, -0.5, 0)
+        ]
+    
+    elif profile == "T10":
+        # T10 profile
+        points = [
+            Base.Vector(-3.06511, -1, 0), Base.Vector(-3.06511, 0, 0), Base.Vector(-2.971998, 0.007239, 0),
+            Base.Vector(-2.882718, 0.028344, 0), Base.Vector(-2.79859, 0.062396, 0), Base.Vector(-2.720931, 0.108479, 0),
+            Base.Vector(-2.651061, 0.165675, 0), Base.Vector(-2.590298, 0.233065, 0), Base.Vector(-2.539962, 0.309732, 0),
+            Base.Vector(-2.501371, 0.394759, 0), Base.Vector(-1.879071, 2.105025, 0), Base.Vector(-1.840363, 2.190052, 0),
+            Base.Vector(-1.789939, 2.266719, 0), Base.Vector(-1.729114, 2.334109, 0), Base.Vector(-1.659202, 2.391304, 0),
+            Base.Vector(-1.581518, 2.437387, 0), Base.Vector(-1.497376, 2.47144, 0), Base.Vector(-1.408092, 2.492545, 0),
+            Base.Vector(-1.314979, 2.499784, 0), Base.Vector(1.314979, 2.499784, 0), Base.Vector(1.408091, 2.492545, 0),
+            Base.Vector(1.497371, 2.47144, 0), Base.Vector(1.581499, 2.437387, 0), Base.Vector(1.659158, 2.391304, 0),
+            Base.Vector(1.729028, 2.334109, 0), Base.Vector(1.789791, 2.266719, 0), Base.Vector(1.840127, 2.190052, 0),
+            Base.Vector(1.878718, 2.105025, 0), Base.Vector(2.501018, 0.394759, 0), Base.Vector(2.539726, 0.309732, 0),
+            Base.Vector(2.59015, 0.233065, 0), Base.Vector(2.650975, 0.165675, 0), Base.Vector(2.720887, 0.108479, 0),
+            Base.Vector(2.798571, 0.062396, 0), Base.Vector(2.882713, 0.028344, 0), Base.Vector(2.971997, 0.007239, 0),
+            Base.Vector(3.06511, 0, 0), Base.Vector(3.06511, -1, 0), Base.Vector(-3.06511, -1, 0)
+        ]
+    
+    elif profile == "AT5":
+        # AT5 profile
+        points = [
+            Base.Vector(-2.134129, -0.75, 0), Base.Vector(-2.134129, 0, 0), Base.Vector(-2.058023, 0.005488, 0),
+            Base.Vector(-1.984595, 0.021547, 0), Base.Vector(-1.914806, 0.047569, 0), Base.Vector(-1.849614, 0.082947, 0),
+            Base.Vector(-1.789978, 0.127073, 0), Base.Vector(-1.736857, 0.179338, 0), Base.Vector(-1.691211, 0.239136, 0),
+            Base.Vector(-1.653999, 0.305859, 0), Base.Vector(-1.349199, 0.959203, 0), Base.Vector(-1.286933, 1.054635, 0),
+            Base.Vector(-1.201914, 1.127346, 0), Base.Vector(-1.099961, 1.173664, 0), Base.Vector(-0.986896, 1.18992, 0),
+            Base.Vector(0.986543, 1.18992, 0), Base.Vector(1.099614, 1.173664, 0), Base.Vector(1.201605, 1.127346, 0),
+            Base.Vector(1.286729, 1.054635, 0), Base.Vector(1.349199, 0.959203, 0), Base.Vector(1.653646, 0.305859, 0),
+            Base.Vector(1.690859, 0.239136, 0), Base.Vector(1.73651, 0.179338, 0), Base.Vector(1.789644, 0.127073, 0),
+            Base.Vector(1.849305, 0.082947, 0), Base.Vector(1.914539, 0.047569, 0), Base.Vector(1.984392, 0.021547, 0),
+            Base.Vector(2.057906, 0.005488, 0), Base.Vector(2.134129, 0, 0), Base.Vector(2.134129, -0.75, 0),
+            Base.Vector(-2.134129, -0.75, 0)
+        ]
+    
+    elif profile == "GT2_3mm":
+        # GT2 3mm profile
+        points = [
+            Base.Vector(-1.155171, -0.5, 0), Base.Vector(-1.155171, 0, 0), Base.Vector(-1.065317, 0.016448, 0),
+            Base.Vector(-0.989057, 0.062001, 0), Base.Vector(-0.93297, 0.130969, 0), Base.Vector(-0.90364, 0.217664, 0),
+            Base.Vector(-0.863705, 0.408181, 0), Base.Vector(-0.800056, 0.591388, 0), Base.Vector(-0.713587, 0.765004, 0),
+            Base.Vector(-0.60519, 0.926747, 0), Base.Vector(-0.469751, 1.032548, 0), Base.Vector(-0.320719, 1.108119, 0),
+            Base.Vector(-0.162625, 1.153462, 0), Base.Vector(0, 1.168577, 0), Base.Vector(0.162625, 1.153462, 0),
+            Base.Vector(0.320719, 1.108119, 0), Base.Vector(0.469751, 1.032548, 0), Base.Vector(0.60519, 0.926747, 0),
+            Base.Vector(0.713587, 0.765004, 0), Base.Vector(0.800056, 0.591388, 0), Base.Vector(0.863705, 0.408181, 0),
+            Base.Vector(0.90364, 0.217664, 0), Base.Vector(0.932921, 0.130969, 0), Base.Vector(0.988924, 0.062001, 0),
+            Base.Vector(1.065168, 0.016448, 0), Base.Vector(1.155171, 0, 0), Base.Vector(1.155171, -0.5, 0),
+            Base.Vector(-1.155171, -0.5, 0)
+        ]
+    
+    elif profile == "GT2_5mm":
+        # GT2 5mm profile
+        points = [
+            Base.Vector(-1.975908, -0.75, 0), Base.Vector(-1.975908, 0, 0), Base.Vector(-1.797959, 0.03212, 0),
+            Base.Vector(-1.646634, 0.121224, 0), Base.Vector(-1.534534, 0.256431, 0), Base.Vector(-1.474258, 0.426861, 0),
+            Base.Vector(-1.446911, 0.570808, 0), Base.Vector(-1.411774, 0.712722, 0), Base.Vector(-1.368964, 0.852287, 0),
+            Base.Vector(-1.318597, 0.989189, 0), Base.Vector(-1.260788, 1.123115, 0), Base.Vector(-1.195654, 1.25375, 0),
+            Base.Vector(-1.12331, 1.380781, 0), Base.Vector(-1.043869, 1.503892, 0), Base.Vector(-0.935264, 1.612278, 0),
+            Base.Vector(-0.817959, 1.706414, 0), Base.Vector(-0.693181, 1.786237, 0), Base.Vector(-0.562151, 1.851687, 0),
+            Base.Vector(-0.426095, 1.9027, 0), Base.Vector(-0.286235, 1.939214, 0), Base.Vector(-0.143795, 1.961168, 0),
+            Base.Vector(0, 1.9685, 0), Base.Vector(0.143796, 1.961168, 0), Base.Vector(0.286235, 1.939214, 0),
+            Base.Vector(0.426095, 1.9027, 0), Base.Vector(0.562151, 1.851687, 0), Base.Vector(0.693181, 1.786237, 0),
+            Base.Vector(0.817959, 1.706414, 0), Base.Vector(0.935263, 1.612278, 0), Base.Vector(1.043869, 1.503892, 0),
+            Base.Vector(1.123207, 1.380781, 0), Base.Vector(1.195509, 1.25375, 0), Base.Vector(1.26065, 1.123115, 0),
+            Base.Vector(1.318507, 0.989189, 0), Base.Vector(1.368956, 0.852287, 0), Base.Vector(1.411872, 0.712722, 0),
+            Base.Vector(1.447132, 0.570808, 0), Base.Vector(1.474611, 0.426861, 0), Base.Vector(1.534583, 0.256431, 0),
+            Base.Vector(1.646678, 0.121223, 0), Base.Vector(1.798064, 0.03212, 0), Base.Vector(1.975908, 0, 0),
+            Base.Vector(1.975908, -0.75, 0), Base.Vector(-1.975908, -0.75, 0)
+        ]
+    
+    elif profile == "XL":
+        # XL profile
+        points = [
+            Base.Vector(-1.525411, -1, 0), Base.Vector(-1.525411, 0, 0), Base.Vector(-1.41777, 0.015495, 0),
+            Base.Vector(-1.320712, 0.059664, 0), Base.Vector(-1.239661, 0.129034, 0), Base.Vector(-1.180042, 0.220133, 0),
+            Base.Vector(-0.793044, 1.050219, 0), Base.Vector(-0.733574, 1.141021, 0), Base.Vector(-0.652507, 1.210425, 0),
+            Base.Vector(-0.555366, 1.254759, 0), Base.Vector(-0.447675, 1.270353, 0), Base.Vector(0.447675, 1.270353, 0),
+            Base.Vector(0.555366, 1.254759, 0), Base.Vector(0.652507, 1.210425, 0), Base.Vector(0.733574, 1.141021, 0),
+            Base.Vector(0.793044, 1.050219, 0), Base.Vector(1.180042, 0.220133, 0), Base.Vector(1.239711, 0.129034, 0),
+            Base.Vector(1.320844, 0.059664, 0), Base.Vector(1.417919, 0.015495, 0), Base.Vector(1.525411, 0, 0),
+            Base.Vector(1.525411, -1, 0), Base.Vector(-1.525411, -1, 0)
+        ]
+    
+    elif profile == "L":
+        # L profile
+        points = [
+            Base.Vector(-2.6797, -1, 0), Base.Vector(-2.6797, 0, 0), Base.Vector(-2.600907, 0.006138, 0),
+            Base.Vector(-2.525342, 0.024024, 0), Base.Vector(-2.45412, 0.052881, 0), Base.Vector(-2.388351, 0.091909, 0),
+            Base.Vector(-2.329145, 0.140328, 0), Base.Vector(-2.277614, 0.197358, 0), Base.Vector(-2.234875, 0.262205, 0),
+            Base.Vector(-2.202032, 0.334091, 0), Base.Vector(-1.75224, 1.57093, 0), Base.Vector(-1.719538, 1.642815, 0),
+            Base.Vector(-1.676883, 1.707663, 0), Base.Vector(-1.62542, 1.764693, 0), Base.Vector(-1.566256, 1.813112, 0),
+            Base.Vector(-1.500512, 1.85214, 0), Base.Vector(-1.4293, 1.880997, 0), Base.Vector(-1.353742, 1.898883, 0),
+            Base.Vector(-1.274949, 1.905021, 0), Base.Vector(1.275281, 1.905021, 0), Base.Vector(1.354056, 1.898883, 0),
+            Base.Vector(1.429576, 1.880997, 0), Base.Vector(1.500731, 1.85214, 0), Base.Vector(1.566411, 1.813112, 0),
+            Base.Vector(1.625508, 1.764693, 0), Base.Vector(1.676919, 1.707663, 0), Base.Vector(1.719531, 1.642815, 0),
+            Base.Vector(1.752233, 1.57093, 0), Base.Vector(2.20273, 0.334091, 0), Base.Vector(2.235433, 0.262205, 0),
+            Base.Vector(2.278045, 0.197358, 0), Base.Vector(2.329455, 0.140328, 0), Base.Vector(2.388553, 0.091909, 0),
+            Base.Vector(2.454233, 0.052881, 0), Base.Vector(2.525384, 0.024024, 0), Base.Vector(2.600904, 0.006138, 0),
+            Base.Vector(2.6797, 0, 0), Base.Vector(2.6797, -1, 0), Base.Vector(-2.6797, -1, 0)
+        ]
+    
     else:
         # Default simple rectangular tooth
         return None
@@ -185,7 +326,7 @@ def create_timing_belt(tooth_count=72, belt_width=None, pitch=None, profile="S3M
     for i in range(tooth_count):
         angle = i * tooth_angle
         
-        if use_accurate_teeth and profile in ["S3M", "GT2_2mm", "T2.5", "MXL", "HTD_3mm", "HTD_5mm"]:
+        if use_accurate_teeth and profile in ["S3M", "GT2_2mm", "T2.5", "MXL", "HTD_3mm", "HTD_5mm", "HTD_8mm", "T5", "T10", "AT5", "GT2_3mm", "GT2_5mm", "XL", "L"]:
             # Use accurate tooth profile
             tooth_face = create_tooth_profile(profile)
             if tooth_face:
