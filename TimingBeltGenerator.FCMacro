@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
 """
-Timing Belt Generator for FreeCAD - WORKING VERSION
+Timing Belt Generator for FreeCAD
 Author: andreaderuvo
+GitHub: https://github.com/andreaderuvo/freecad-timing-belt-generator
+License: CC BY-SA 3.0
+
+Parametric timing belt generator for FreeCAD with accurate tooth profiles.
+Supports S3M, GT2, T2.5, HTD, MXL and many more belt types.
 """
 
 import FreeCAD
@@ -538,7 +543,8 @@ def belt_207_simple():
 if __name__ == "__main__":
     create_belt_gui()
 else:
-    print("Timing Belt Generator loaded")
+    print("FreeCAD Timing Belt Generator loaded")
+    print("GitHub: https://github.com/andreaderuvo/freecad-timing-belt-generator")
     print("Quick functions:")
     print("  S3M: belt_72(), belt_90(), belt_207_simple()")  
     print("  GT2: gt2_60(), gt2_80()")
